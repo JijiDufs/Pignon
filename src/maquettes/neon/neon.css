@@ -1,0 +1,36 @@
+/* Néon — the shop sign you see from the end of the street. Scoped under .neo. */
+.neo-glow {
+  text-shadow:
+    0 0 18px rgb(255 62 165 / 0.75),
+    0 0 60px rgb(255 62 165 / 0.45);
+}
+
+/* Hollow lettering: the tube of the sign, before it is lit. */
+.neo-outline {
+  color: transparent;
+  -webkit-text-stroke: 2px #b8a6ff;
+}
+
+.neo-tube {
+  box-shadow:
+    0 0 0 2px #ff3ea5,
+    0 0 26px rgb(255 62 165 / 0.55),
+    inset 0 0 18px rgb(255 62 165 / 0.25);
+}
+
+/* The band that scrolls the list of what the shop does. The track is doubled, so -50% loops cleanly. */
+@keyframes neo-defile {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.neo-defile {
+  animation: neo-defile 38s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neo-defile {
+    animation: none;
+  }
+}

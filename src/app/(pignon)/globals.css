@@ -1,0 +1,307 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Pignon — « la maquette blanche ».
+ * The architect's white model of the city: every surface is a quiet neutral, and the only
+ * colour belongs to what matters (an opportunity, the one action, the key figure).
+ * Method: unslop by Damir Sokolovsky (@heydamir), CC BY 4.0 — see DESIGN.md.
+ *
+ * Token names date from the first (night-blue) version; read them as roles:
+ *   nuit-950 white (sidebar, text on accent) · nuit-900 page · nuit-800 card
+ *   nuit-700 raised / hover · nuit-600 tracks, selected · nuit-500 strong borders
+ *   craie / brume / pave: primary, secondary, muted text · lumiere: the accent
+ */
+@theme {
+  --color-nuit-950: #ffffff;
+  --color-nuit-900: #fafafa;
+  --color-nuit-800: #ffffff;
+  --color-nuit-700: #f4f4f5;
+  --color-nuit-600: #e9e9eb;
+  --color-nuit-500: #d4d4d8;
+
+  --color-craie: #171717;
+  --color-brume: #525252;
+  --color-pave: #6b6b6b;
+
+  /* The one accent: Lille brick, pushed to vermilion. White text on it passes 4.5:1. */
+  --color-lumiere: #d9391a;
+  --color-lumiere-doux: #bf3014;
+  --color-lumiere-fort: #a8290f;
+  --color-lumiere-pale: #fbeae5;
+
+  /* Meaning only, toned to sit inside the neutrals */
+  --color-enseigne: #dc2626;
+  --color-pharmacie: #16a34a;
+  --color-lune: #2f6fde;
+  --color-lilas: #7457d6;
+  --color-paille: #a16207;
+  --color-ambre: #c2410c;
+
+  /* Opportunity heat: one hue, from grey to full vermilion. Marks only, never text. */
+  --color-heat-hot: #e8421c;
+  --color-heat-warm: #f28a55;
+  --color-heat-mild: #f5bfa0;
+  --color-heat-cold: #c4c7cc;
+
+  --color-trait: rgb(23 23 23 / 0.08);
+  --color-trait-fort: rgb(23 23 23 / 0.16);
+
+  --text-2xs: 0.6875rem;
+  --text-2xs--line-height: 1rem;
+  --text-ui: 0.8125rem;
+  --text-ui--line-height: 1.25rem;
+
+  /* One easing curve for everything */
+  --ease-doux: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-franc: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --shadow-petit: 0 1px 2px rgb(0 0 0 / 0.05);
+  --shadow-flottant: 0 0 0 1px rgb(23 23 23 / 0.06), 0 12px 32px -8px rgb(0 0 0 / 0.14), 0 2px 6px rgb(0 0 0 / 0.04);
+  /* The one raised element of a screen: it stands out by height, not by glow */
+  --shadow-halo: 0 0 0 1px rgb(23 23 23 / 0.07), 0 28px 60px -24px rgb(0 0 0 / 0.28), 0 6px 16px -6px rgb(0 0 0 / 0.08);
+
+  --animate-allumage: allumage 420ms var(--ease-doux) both;
+  --animate-veille: veille 1.8s ease-in-out infinite;
+
+  /* Something found, unlocked, reserved or signed settles into place */
+  @keyframes allumage {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  /* Only for something that is live right now */
+  @keyframes veille {
+    0%,
+    100% {
+      opacity: 0.35;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", Menlo, monospace;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.4);
+  --radius-4xl: calc(var(--radius) * 3.2);
+}
+
+/* Semantic tokens read by the ui/ components. One light theme. */
+:root {
+  --background: #fafafa;
+  --foreground: #171717;
+  --card: #ffffff;
+  --card-foreground: #171717;
+  --popover: #ffffff;
+  --popover-foreground: #171717;
+  /* The primary action is ink on white; the accent stays for selection and key figures */
+  --primary: #171717;
+  --primary-foreground: #ffffff;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #171717;
+  --muted: #f4f4f5;
+  --muted-foreground: #6b6b6b;
+  --accent: #f4f4f5;
+  --accent-foreground: #171717;
+  --destructive: #dc2626;
+  --border: rgb(23 23 23 / 0.08);
+  --input: rgb(23 23 23 / 0.14);
+  --ring: #171717;
+  --chart-1: #d9391a;
+  --chart-2: #171717;
+  --chart-3: #a3a3a3;
+  --chart-4: #f28a55;
+  --chart-5: #d4d4d8;
+  --radius: 0.625rem;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #171717;
+  --sidebar-primary: #171717;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #f4f4f5;
+  --sidebar-accent-foreground: #171717;
+  --sidebar-border: rgb(23 23 23 / 0.08);
+  --sidebar-ring: #171717;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    color-scheme: light;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scrollbar-color: var(--color-nuit-500) transparent;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+  p,
+  li {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: var(--color-lumiere);
+    color: #fff;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-craie);
+    outline-offset: 2px;
+  }
+  button,
+  [role="button"],
+  summary,
+  label[for] {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+}
+
+/* Display type: large, light in weight, tight. Hierarchy comes from size, not from boldness. */
+@utility enseigne {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+}
+
+/* Section and card titles */
+@utility titre {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+
+/* What is said out loud (call scripts, quotes): same family, set larger and calmer */
+@utility voix {
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 1.55;
+}
+
+/* Numbers that line up in lists and counters */
+@utility chiffres {
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "lnum" 1;
+}
+
+/* The signature: an architect's dimension. Small figures and meta in mono. */
+@utility cote {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+}
+
+/* The gable ("pignon"): the brand's one ownable shape */
+@utility pignon {
+  clip-path: polygon(50% 0%, 100% 30%, 100% 100%, 0% 100%, 0% 30%);
+}
+
+/* The single raised element of a screen */
+@utility halo {
+  box-shadow: var(--shadow-halo);
+}
+
+@utility scrollbar-fin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-nuit-500) transparent;
+}
+
+/* A sheet floating over the map: nearly opaque, so text stays crisp */
+@utility feuille {
+  background: rgb(255 255 255 / 0.9);
+  backdrop-filter: blur(18px) saturate(1.4);
+  box-shadow: var(--shadow-flottant);
+}
+
+/* 3D stage for objects shown in perspective (devices, sheets) */
+@utility scene-3d {
+  perspective: 1800px;
+  perspective-origin: 50% 30%;
+}
+
+/* MapLibre chrome. The attribution is a licence requirement: restyle it, never hide it. */
+.pignon-map .maplibregl-ctrl-attrib,
+.pignon-map .maplibregl-ctrl-attrib.maplibregl-compact {
+  background: rgb(255 255 255 / 0.8);
+  color: var(--color-pave);
+  font-size: 10px;
+}
+.pignon-map .maplibregl-ctrl-attrib a {
+  color: var(--color-brume);
+}
+.pignon-map .maplibregl-canvas:focus-visible {
+  outline: 2px solid var(--color-craie);
+  outline-offset: -2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

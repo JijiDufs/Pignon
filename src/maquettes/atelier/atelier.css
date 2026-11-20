@@ -1,0 +1,135 @@
+/*
+ * Atelier — the workshop wall: charcoal, raw steel, safety orange.
+ * Every rule is scoped under .atl so the four art directions can share one stylesheet bundle.
+ */
+.atl {
+  --atl-charbon: #1b1b1e;
+  --atl-suie: #121214;
+  --atl-fonte: #303035; /* rules and raised surfaces on charcoal */
+  --atl-acier: #e8e6e1;
+  --atl-zinc: #d3d0c8; /* one shade under steel: pressed areas, rules on steel */
+  --atl-papier: #f6f5f1;
+  --atl-signal: #ff5b1f;
+  --atl-beton: #8c8a85;
+  --atl-beton-clair: #bab7b0; /* secondary text on charcoal (8:1) */
+  --atl-beton-fonce: #5a5853; /* secondary text on steel (5.7:1) */
+
+  min-height: 100vh;
+  background: var(--atl-charbon);
+  color: var(--atl-acier);
+  font-family: var(--font-atl-text), "Helvetica Neue", Arial, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.55;
+}
+
+.atl ::selection {
+  background: var(--atl-signal);
+  color: var(--atl-charbon);
+}
+
+/* The sticky header would otherwise cover the top of a section reached by an anchor. */
+.atl [id] {
+  scroll-margin-top: 5.5rem;
+}
+
+.atl :focus-visible {
+  outline: 3px solid var(--atl-signal);
+  outline-offset: 3px;
+}
+
+/* On orange or steel the orange ring disappears: switch to charcoal. */
+.atl .atl-focus-dark:focus-visible {
+  outline-color: var(--atl-charbon);
+}
+
+/* Signage lettering: condensed, heavy, capitals. */
+.atl-display {
+  font-family: var(--font-atl-display), "Arial Narrow", sans-serif;
+  font-weight: 800;
+  line-height: 0.92;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.atl-cond {
+  font-family: var(--font-atl-display), "Arial Narrow", sans-serif;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* Hazard tape: marks the places where the visitor acts (calling). */
+.atl-hazard {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--atl-signal) 0 14px,
+    var(--atl-charbon) 14px 28px
+  );
+}
+
+/* Fine hatching: something that is closed or inactive. */
+.atl-hatch {
+  background-image: repeating-linear-gradient(-45deg, rgb(27 27 30 / 0.16) 0 2px, transparent 2px 9px);
+}
+
+/* Perforated sheet of the tool board. */
+.atl-holes {
+  background-color: var(--atl-acier);
+  background-image: radial-gradient(circle, rgb(27 27 30 / 0.26) 0 2.1px, transparent 2.7px);
+  background-size: 26px 26px;
+  background-position: 13px 13px;
+}
+
+/* Stamped-metal corners. The clip also cuts outlines, so focus is drawn inside. */
+.atl-chamfer {
+  --atl-cut: 12px;
+  clip-path: polygon(
+    var(--atl-cut) 0,
+    100% 0,
+    100% calc(100% - var(--atl-cut)),
+    calc(100% - var(--atl-cut)) 100%,
+    0 100%,
+    0 var(--atl-cut)
+  );
+}
+
+.atl .atl-chamfer:focus-visible {
+  outline-color: var(--atl-charbon);
+  outline-offset: -6px;
+}
+
+/* One line of lettering sized to its container: --atl-n is the number of characters. */
+.atl-fit {
+  container-type: inline-size;
+}
+
+.atl-fit > * {
+  display: block;
+  white-space: nowrap;
+  font-size: min(var(--atl-fit-max, 4rem), calc(100cqw / (var(--atl-n) * 0.5)));
+}
+
+/* A hung tool settles on its painted outline when the page opens. */
+@keyframes atl-swing {
+  0% {
+    transform: rotate(var(--atl-from, -9deg));
+  }
+  30% {
+    transform: rotate(calc(var(--atl-from, -9deg) * -0.55));
+  }
+  55% {
+    transform: rotate(calc(var(--atl-from, -9deg) * 0.28));
+  }
+  78% {
+    transform: rotate(calc(var(--atl-from, -9deg) * -0.1));
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.atl-tool {
+  transform-origin: 0 0;
+  animation: atl-swing 1.7s cubic-bezier(0.36, 0, 0.3, 1) both;
+}

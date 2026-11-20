@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+/*
+ * Mockups are client websites, not Pignon screens: none of Pignon's tokens apply here.
+ * Each art direction scopes its own variables and fonts on its root element.
+ */
+html {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
