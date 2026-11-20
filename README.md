@@ -9,6 +9,7 @@ Ce dépôt contient toute l'interface et aucun moteur.
 - Les commerces, les avis, les numéros de téléphone et les chiffres sont **inventés**, générés de façon déterministe dans `src/lib/data`.
 - Aucun compte n'est créé, aucun mot de passe n'est conservé, aucun paiement n'est effectué. Les abonnements sont simulés.
 - L'état vit dans le navigateur (`localStorage`). Le seul appel réseau est celui des tuiles de la carte.
+- Toutes les pages demandent aux moteurs de recherche de ne pas les indexer (`robots` dans les deux layouts racine), tant que c'est un prototype.
 
 ## Lancer le projet
 

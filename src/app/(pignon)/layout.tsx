@@ -14,6 +14,9 @@ export const metadata: Metadata = {
   },
   description:
     "Pignon repère les commerces sans site web autour de toi, prépare leur maquette et t'aide à décrocher le rendez-vous.",
+  // A prototype with invented businesses and simulated plans must not show up in search results.
+  // Remove when the real product launches.
+  robots: { index: false, follow: false },
 };
 
 export const viewport: Viewport = {

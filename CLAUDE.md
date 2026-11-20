@@ -66,7 +66,7 @@ src/maquettes/               templates de sites par direction artistique
 
 `CITIES`, `SECTORS`, `DAS`, `SITE_STATUS`, `HEAT`, `PIPELINE_STAGES`, `getCity`, `getSector`, `getDa`, `heatOf`, `getBusinesses`, `getOpportunities(cityId, { sectors, radiusKm })`, `getBusiness(id)`, `getBusinessBySlug(slug)`, `searchBusinesses`, `getZoneStats`, `getNewRegistrations`, `getMaquetteContent(business)`, `buildCallScript(business, prénom)`, `buildPrompt(business, da)`. Types dans `@/lib/types`.
 
-Les commerces sont inventés. N'affiche jamais `site.url` comme un lien cliquable.
+Les commerces sont inventés. N'affiche jamais `site.url` comme un lien cliquable. Tant que c'est un prototype, tout le site est en `noindex` (champ `robots` des deux layouts racine) : ne le retire pas.
 
 ## État (`@/lib/store`)
 
